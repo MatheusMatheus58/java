@@ -1,0 +1,135 @@
+package contatos;
+import java.sql.*;
+
+public class Contatos extends Conexao {
+	
+	private int id;
+	private String nome;
+	private String sobrenome;
+	private String email;
+	private String telefone;
+	
+	
+	Connection cx;
+	
+	public Contatos() throws ClassNotFoundException, SQLException {
+		
+		this.cx = getConexao();
+	}
+	
+	public Contatos(Connection cx) throws ClassNotFoundException, SQLException  {
+		
+		this.cx = cx;
+	}
+	
+	@SuppressWarnings("null")
+	public boolean consultarUsuarios() throws SQLException {
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		try {
+		
+		pst = this.cx.prepareStatement("SELECT * FROM contatos where nome=? and sobrenome=? and telefone=? and email=?");	
+		pst.setString(1, nome);	
+		pst.setString(2, sobrenome);
+		pst.setString(3, telefone);
+		pst.setString(4, email);
+		rs = pst.executeQuery();	
+		
+		if (rs.next()) {
+			return true;
+		}
+			
+		}finally {
+			pst.close();
+			rs.close();
+		} 
+		
+		return false;
+		
+	} 
+	
+	public void incluirTelefones() throws SQLException {
+		
+		PreparedStatement pst = null;
+		
+		try {
+		
+		pst = this.cx.prepareStatement("INSERT INTO contatos (nome, sobrenome, email, telefone) "
+		+ "VALUES (?,?,?,?)" );	
+		pst.setString(1, this.nome);	
+		pst.setString(2, this.sobrenome);
+		pst.setString(3, this.email);
+		pst.setString(4, this.telefone);
+		
+		pst.executeUpdate();
+		
+			
+		}finally {
+			pst.close();
+		} 
+			
+		
+	}
+	
+	public void deletarTelefones() throws SQLException {
+		
+         PreparedStatement pst = null;
+		
+		try {
+		
+		pst = this.cx.prepareStatement("DELETE FROM contatos WHERE id=?;");
+		pst.setInt(1,id);
+		int apagado=pst.executeUpdate();
+		if(apagado> 0) {
+			System.out.println("Contato apagado com sucesso!");
+			
+		}else {
+			System.out.println("Contato não apagado");
+		}
+		}
+		
+		finally {
+			pst.close();
+		}
+		
+	}
+	
+	
+	
+	public void setId(int id) {
+		this.id = id;
+		
+	}
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setNome(String nome) {
+		this.nome= nome;
+	}
+	public String getNome() {
+		return this.nome;
+	}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+	public String getSobrenome(){
+		return this.sobrenome;
+	}
+	public void setEmail(String email){
+		this.email = email;
+	}
+	public String getEmail(){
+		return this.email;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+	public String getTelefone() {
+		return this.telefone;
+	}
+
+	
+}
