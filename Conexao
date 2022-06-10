@@ -1,0 +1,17 @@
+package contatos;
+import java.sql.*;
+
+public abstract class Conexao {
+
+	final private String driver ="com.mysql.cj.jdbc.Driver";
+	final private String url="jdbc:mysql://localhost:3306/listatelefonica";
+	final private String usuario="root";
+	final private String senha="M@theus02";
+	
+	public Connection getConexao() throws 
+		ClassNotFoundException, SQLException {
+		
+		Class.forName(driver);
+		return DriverManager.getConnection(url, usuario, senha);
+	}
+}
