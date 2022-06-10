@@ -1,0 +1,36 @@
+package contatos;
+
+import java.sql.SQLException;
+
+public class Applista {
+
+	public static void main(String[] args) throws 
+	SQLException, ClassNotFoundException {
+		
+	
+		
+		Contatos ctt = new Contatos();
+		
+		ctt.setId(1);
+		ctt.deletarTelefones();
+		
+	
+		 //ctt.setNome("xxxxx");
+		//ctt.setSobrenome("xxxxx");
+		//ctt.setTelefone("xxxxxxxxxx");
+		//ctt.setEmail("xxxxxxxx@gmail.com");
+		
+		//ctt.setNome("Luana");
+		//ctt.setSobrenome("Ferreira");
+		//ctt.setTelefone("629930854xx5x");
+		//ctt.setEmail("luaninha2021@gmail.com");
+		
+		//if(ctt.consultarUsuarios()) {
+		//System.out.println("Usuario já cadastrado!");	
+		//}else {
+		//ctt.incluirTelefones();		
+		//	System.out.println("Usuario cadastrado!");
+			
+		}
+
+	}
